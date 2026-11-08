@@ -22,10 +22,19 @@ jobs:
           mkdir -p ~/.android
           keytool -genkey -v -keystore ~/.android/debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
 
-      - name: Build debug APK
+      - name: Download Gradle (retry)
         run: |
           chmod +x gradlew
-          ./gradlew --console=plain assembleFossDebug -x lint --warning-mode summary
+          sed -i 's/^networkTimeout=.*/networkTimeout=120000/' gradle/wrapper/gradle-wrapper.properties
+          for i in 1 2 3 4; do
+            echo "Percobaan $i"
+            ./gradlew --version && exit 0
+            sleep 15
+          done
+          exit 1
+
+      - name: Build debug APK
+        run: ./gradlew --console=plain assembleFossDebug -x lint --warning-mode summary
         env:
           PULL_REQUEST: "false"
 
