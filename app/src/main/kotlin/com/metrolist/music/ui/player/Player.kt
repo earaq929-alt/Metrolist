@@ -55,6 +55,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ContainedLoadingIndicator
@@ -240,7 +241,7 @@ fun BottomSheetPlayer(
 
     val playerBackground by rememberEnumPreference(
         key = PlayerBackgroundStyleKey,
-        defaultValue = PlayerBackgroundStyle.DEFAULT,
+        defaultValue = PlayerBackgroundStyle.GRADIENT, // RaqMusic: background gradient dari cover
     )
     val playerButtonsStyle by rememberEnumPreference(
         key = PlayerButtonsStyleKey,
@@ -1823,7 +1824,7 @@ fun BottomSheetPlayer(
                                 modifier =
                                     Modifier
                                         .size(72.dp)
-                                        .clip(RoundedCornerShape(playPauseRoundness))
+                                        .clip(CircleShape) // RaqMusic: tombol play bulat putih
                                         .background(textButtonColor)
                                         .clickable {
                                             if (isListenTogetherGuest) {

@@ -55,13 +55,22 @@ import androidx.compose.ui.unit.dp
 import com.metrolist.music.R
 import com.metrolist.music.ui.screens.OptionStats
 
+// RaqMusic: chip glass, yang terpilih lavender (sesuai desain)
+@Composable
+private fun raqChipColors(containerColor: Color) = FilterChipDefaults.filterChipColors(
+    containerColor = containerColor,
+    labelColor = Color.White,
+    selectedContainerColor = Color(0xFFDCCDFF),
+    selectedLabelColor = Color(0xFF1A0F3A),
+)
+
 @Composable
 fun <E> ChipsRow(
     chips: List<Pair<E, String>>,
     currentValue: E,
     onValueUpdate: (E) -> Unit,
     modifier: Modifier = Modifier,
-    containerColor: Color = MaterialTheme.colorScheme.surfaceContainer,
+    containerColor: Color = Color.White.copy(alpha = 0.09f), // RaqMusic: glass
 ) {
     Row(
         modifier =
@@ -76,9 +85,7 @@ fun <E> ChipsRow(
             FilterChip(
                 label = { Text(label) },
                 selected = currentValue == value,
-                colors = FilterChipDefaults.filterChipColors(
-                    containerColor = containerColor,
-                ),
+                colors = raqChipColors(containerColor),
                 onClick = { onValueUpdate(value) },
                 shape = RoundedCornerShape(16.dp),
                 border = null
@@ -99,7 +106,7 @@ fun <Int> ChoiceChipsRow(
     currentValue: Int,
     onValueUpdate: (Int) -> Unit,
     modifier: Modifier = Modifier,
-    containerColor: Color = MaterialTheme.colorScheme.surfaceContainer,
+    containerColor: Color = Color.White.copy(alpha = 0.09f), // RaqMusic: glass
 ) {
     var expandIconDegree by remember { mutableFloatStateOf(0f) }
     val rotationAnimation by animateFloatAsState(
@@ -194,9 +201,7 @@ fun <Int> ChoiceChipsRow(
                     FilterChip(
                         label = { Text(label) },
                         selected = currentValue == value,
-                        colors = FilterChipDefaults.filterChipColors(
-                            containerColor = containerColor,
-                        ),
+                        colors = raqChipColors(containerColor),
                         onClick = { onValueUpdate(value) },
                         shape = RoundedCornerShape(16.dp),
                         border = null

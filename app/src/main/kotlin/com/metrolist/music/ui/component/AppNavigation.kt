@@ -12,8 +12,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
+import com.metrolist.music.ui.theme.RaqMint
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
+import androidx.compose.material3.NavigationRailItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -57,7 +60,7 @@ fun AppNavigationRail(
     onSearchLongClick: (() -> Unit)? = null,
     onHomeLongHold: (() -> Unit)? = null,
 ) {
-    val containerColor = if (pureBlack) Color.Black else MaterialTheme.colorScheme.surfaceContainer
+    val containerColor = if (pureBlack) Color.Black else Color.Black.copy(alpha = 0.40f) // RaqMusic: glass gelap
     val haptics = LocalHapticFeedback.current
     val viewConfiguration = LocalViewConfiguration.current
 
@@ -108,6 +111,11 @@ fun AppNavigationRail(
 
             NavigationRailItem(
                 selected = isSelected,
+                colors = NavigationRailItemDefaults.colors(
+                    selectedIconColor = RaqMint,
+                    indicatorColor = Color.Transparent,
+                    unselectedIconColor = Color.White.copy(alpha = 0.55f),
+                ),
                 onClick = {
                     if (!isSearchItem && !isHomeHoldItem) {
                         onItemClick(screen, currentIsSelected)
@@ -139,7 +147,7 @@ fun AppNavigationBar(
     onSearchLongClick: (() -> Unit)? = null,
     onHomeLongHold: (() -> Unit)? = null,
 ) {
-    val containerColor = if (pureBlack) Color.Black else MaterialTheme.colorScheme.surfaceContainer
+    val containerColor = if (pureBlack) Color.Black else Color.Black.copy(alpha = 0.40f) // RaqMusic: glass gelap
     val contentColor = if (pureBlack) Color.White else MaterialTheme.colorScheme.onSurfaceVariant
     val haptics = LocalHapticFeedback.current
     val viewConfiguration = LocalViewConfiguration.current
@@ -190,6 +198,13 @@ fun AppNavigationBar(
 
             NavigationBarItem(
                 selected = isSelected,
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = RaqMint,
+                    selectedTextColor = RaqMint,
+                    indicatorColor = Color.Transparent,
+                    unselectedIconColor = Color.White.copy(alpha = 0.55f),
+                    unselectedTextColor = Color.White.copy(alpha = 0.55f),
+                ),
                 onClick = {
                     if (!isSearchItem && !isHomeHoldItem) {
                         onItemClick(screen, currentIsSelected)

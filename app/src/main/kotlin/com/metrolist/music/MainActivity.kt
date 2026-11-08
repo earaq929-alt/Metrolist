@@ -1046,6 +1046,11 @@ class MainActivity : FragmentActivity() {
                     LocalChangelogState provides showChangelog,
                     LocalArtistNameAliases provides artistNameAliases,
                 ) {
+                    // RaqMusic: tampilkan UI desain baru di atas mesin Metrolist
+                    if (com.metrolist.music.raq.RaqSwitch.useRaq) {
+                        com.metrolist.music.raq.RaqAppHost()
+                        return@CompositionLocalProvider
+                    }
                     if (showChangelog.value) {
                         ChangelogScreen(onDismiss = { showChangelog.value = false })
                     }

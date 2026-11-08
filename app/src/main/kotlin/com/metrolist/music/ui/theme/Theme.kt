@@ -25,7 +25,8 @@ import com.materialkolor.dynamiccolor.ColorSpec
 import com.materialkolor.rememberDynamicColorScheme
 import com.materialkolor.score.Score
 
-val DefaultThemeColor = Color(0xFFED5564)
+// RaqMusic: seed ungu sesuai desain (sebelumnya merah 0xFFED5564)
+val DefaultThemeColor = Color(0xFFA855F7)
 
 @Composable
 fun MetrolistTheme(
@@ -36,7 +37,8 @@ fun MetrolistTheme(
 ) {
     val context = LocalContext.current
     // Determine if system dynamic colors should be used (Android S+ and default theme color)
-    val useSystemDynamicColor = (themeColor == DefaultThemeColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+    // RaqMusic: matikan warna wallpaper sistem supaya palet ungu desain selalu dipakai
+    val useSystemDynamicColor = false
 
     // Select the appropriate color scheme generation method
     val baseColorScheme = if (useSystemDynamicColor) {
