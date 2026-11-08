@@ -376,7 +376,9 @@
             </intent-filter>
         </service>
 
-        <service android:name=".raq.island.DynamicIslandService" android:exported="false" />
+        <service
+            android:name="com.metrolist.music.raq.island.DynamicIslandService"
+            android:exported="false" />
     </application>
 
 </manifest>
